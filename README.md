@@ -34,7 +34,7 @@ Because UDP does not guarantee delivery, this project implements custom reliabil
 4. **Start the Client:** Finally, run `UdpClient.java` on port `1338` to initiate the message exchange.
 5. **Observe the Console:** Watch the console outputs across all three applications to see the Alternating Byte Protocol in action, including successful deliveries, simulated 20% packet drops, and automatic 500ms client retransmissions.
 
-6. ## Technologies Used
+## Technologies Used
 * **Language:** Java 21 (leveraging Virtual Threads and the standard `java.net` DatagramSocket API)
 * **Testing & Debugging:** Wireshark (for UDP packet analysis and protocol verification)
 * **Environment:** IntelliJ IDEA / macOS
