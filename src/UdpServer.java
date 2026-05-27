@@ -26,27 +26,27 @@ public class UdpServer {
         DatagramPacket receivedSegment = new DatagramPacket(receivedBuffer, 2);
 
         try (DatagramSocket serverSocket = new DatagramSocket(1337)) {     // client socket 1338 server 1337
-                DatagramPacket sendSegment = new DatagramPacket(buffer, 2, InetAddress.getByName("localhost"), 3888); // packet
+            DatagramPacket sendSegment = new DatagramPacket(buffer, 2, InetAddress.getByName("localhost"), 3888); // packet
             System.out.println("Server waiting...");
-                while (true) {
+            while (true) {
 
-                    serverSocket.receive(receivedSegment); // block wartet auf Nachricht
+                serverSocket.receive(receivedSegment); // block wartet auf Nachricht
 
-                    //lesen
-                    byte receivedL = receivedSegment.getData()[0];
-                    byte receivedKB = receivedSegment.getData()[1];
+                //lesen
+                byte receivedL = receivedSegment.getData()[0];
+                byte receivedKB = receivedSegment.getData()[1];
 
-                    System.out.println("Text: " + (char)receivedL + " Kontrollbyte: " + receivedKB);
+                System.out.println("Text: " + (char)receivedL + " Kontrollbyte: " + receivedKB);
 
                 switch (currentState){
 
                     case S1:
 
                         if(receivedKB == KB_0){
-                                if (dataPointer >= data.length()){
-                                    System.out.println("Finish");
-                                    dataPointer = 0;
-                                }
+                            if (dataPointer >= data.length()){
+                                System.out.println("Finish");
+                                dataPointer = 0;
+                            }
                             sendSegment.getData()[0] = (byte) data.charAt(dataPointer); //hole Buchstaben ab
                             sendSegment.getData()[1] = KB_0; // schreibe 0x00 in getData 1
                             sendSegment.setPort(3888); // hardgecoded weil error gab
@@ -84,10 +84,10 @@ public class UdpServer {
 
                 }
 
-                }
-            } catch (Exception e) {
-                throw new RuntimeException(e);
             }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
 
 
